@@ -3,6 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { UsuarioService } from "src/usuario/services/usuario.services";
 import { Bcrypt } from "../bcrypt/bcrypt";
 
+
 @Injectable()
 export class AuthService {
     constructor (
@@ -12,7 +13,7 @@ export class AuthService {
     ) {}
 
         async validateUser (username: string, password: string): Promise <any> {
-            const buscaUsuario = await this.usuarioService.finByUsuario(username)
+            const buscaUsuario = await this.usuarioService.findByUsuario(username)
 
             if(!buscaUsuario)
                 throw new HttpException('Usuario não encontrado !!!!!!!!!', HttpStatus.NOT_FOUND)
@@ -23,6 +24,7 @@ export class AuthService {
                 const { senha, ...result } = buscaUsuario;
                 return result;
             }
+
             return null
         }
 
@@ -38,3 +40,4 @@ export class AuthService {
             }
         }
 }
+
